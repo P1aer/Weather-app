@@ -4,14 +4,20 @@ import SideBar from "./components/sidebar";
 import theme from "./components/themes";
 import {ThemeProvider} from "@mui/material";
 import {useData} from "./hooks/getData.hook";
+import Loader from "./components/Loader";
 
 function App() {
-    const [loading, data] = useData()
+    const { loading } = useData()
   return (
       <ThemeProvider theme={theme}>
     <div className="App" style={{display: "flex"}}>
-        <SideBar/>
-        <Main/>
+        {
+            loading ? <Loader/>
+            :   <>
+                    <SideBar/>
+                    <Main/>
+                </>
+        }
     </div>
       </ThemeProvider>
   );

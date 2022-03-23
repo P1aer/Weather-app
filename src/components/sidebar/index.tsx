@@ -4,6 +4,8 @@ import {IconButton, Paper, TextField} from "@mui/material";
 import SearchRoundedIcon  from '@mui/icons-material/SearchRounded';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
+import {WeatherCity, weatherCityData} from "../../redux/slices/weather";
+import {store} from "../../redux/store";
 
 const SideBar:FC = () => {
     const options:DateTimeFormatOptions = {
@@ -12,6 +14,7 @@ const SideBar:FC = () => {
         minute: '2-digit',
     };
     const now = new Date().toLocaleDateString('en',options)
+    const selector = weatherCityData(store.getState());
     return (
         <Paper className='paper' >
         <div className="top-search">
@@ -31,7 +34,7 @@ const SideBar:FC = () => {
               src='https://i.pinimg.com/474x/7f/ca/f9/7fcaf995a17a07a35732cdbb5a24f79c.jpg'/>
               <div className='weather-info'>
                   <span className='w-num'>2 <span className='w-grad'>°C</span></span>
-                  <h3 className='w-city'>Moscow, RU</h3>
+                  <h3 className='w-city'>{(selector as WeatherCity[])[0]?.name}, {(selector as WeatherCity[])[0]?.country} </h3>
                   <sub>{now}</sub>
 
               </div>

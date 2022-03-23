@@ -1,29 +1,32 @@
 import React, { useState} from "react";
 import {useAppDispatch} from "../redux/hooks";
-import {setData} from "../redux/slices/weather";
+import {setData, WeatherCity, WeatherData, setCity} from "../redux/slices/weather";
 
-export const useData = (path ='data.json' ) => {
+export const useData = (path ='data.json',city = 'city.json' ) => {
     const [loading, isLoading] = useState(true)
-    const [data, setWeather] = useState({})
-    const dispatch = useAppDispatch()
     const [error, setError] = useState<string[]>([])
+
+    const dispatch = useAppDispatch()
+
         React.useEffect(() => {
             (async () => {
                 try {
                     isLoading(true)
+                    const cit = await  fetch(city)
+                    const ts = await cit.json()
+                    dispatch(setCity(ts))
                     const arr = await fetch(path);
                     const js = await arr.json();
-                     setWeather(js)
-                     dispatch(setData(js))
+                    dispatch(setData(js))
+                    isLoading(false)
+
+
                 } catch (err:any) {
                     setError(prevState => [...prevState, err.message])
-                }
-                finally {
                     isLoading(false)
                 }
-
             })();
         }, [])
-    return [loading, data, error, setWeather]
+    return {loading, error }
 }
 
