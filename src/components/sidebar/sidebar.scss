@@ -26,7 +26,7 @@
 }
 .weather-img {
   width: 75%;
-  object-fit: contain;
+  object-fit: cover;
   margin-bottom: 25px;
   max-height: 400px;
 }
@@ -47,7 +47,7 @@ hr {
   flex-direction: column;
   width: 75%;
   .w-num {
-    font-size: 8rem;
+    font-size: 7rem;
   }
   .w-grad {
     font-weight: normal;
@@ -68,7 +68,14 @@ hr {
 .weather-extra {
   list-style: none;
   width: 75%;
+  font-size: 1.2rem;
   li {
+    display: flex;
+    align-items: center;
+    img {
+      margin-right: 0.75rem;
+      width: 30px;
+    }
     margin-bottom: 10px;
     &:last-child {
       margin-bottom: 0;

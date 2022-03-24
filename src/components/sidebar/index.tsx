@@ -4,8 +4,11 @@ import {IconButton, Paper, TextField} from "@mui/material";
 import SearchRoundedIcon  from '@mui/icons-material/SearchRounded';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
-import {WeatherCity, weatherCityData} from "../../redux/slices/weather";
+import {WeatherCity, weatherCityData, WeatherData, weatherData} from "../../redux/slices/weather";
 import {store} from "../../redux/store";
+import {appDataTemp} from "../../redux/slices/app";
+import {toCelsius, toFahrenheit} from "../../utils/utils";
+import {useAppSelector} from "../../redux/hooks";
 
 const SideBar:FC = () => {
     const options:DateTimeFormatOptions = {
@@ -15,6 +18,10 @@ const SideBar:FC = () => {
     };
     const now = new Date().toLocaleDateString('en',options)
     const selector = weatherCityData(store.getState());
+    const data = useAppSelector(state => state.weather.data)
+    const temp = useAppSelector(state => state.settings.temperature)
+    const temperature = temp ? toCelsius((data as WeatherData)?.current?.temp)
+        : toFahrenheit((data as WeatherData)?.current?.temp)
     return (
         <Paper className='paper' >
         <div className="top-search">
@@ -31,17 +38,17 @@ const SideBar:FC = () => {
             </IconButton>
         </div>
          <img className='weather-img' alt='weather img'
-              src='https://i.pinimg.com/474x/7f/ca/f9/7fcaf995a17a07a35732cdbb5a24f79c.jpg'/>
+              src={`https://openweathermap.org/img/wn/${(data as WeatherData).current.weather[0].icon}@4x.png`}/>
               <div className='weather-info'>
-                  <span className='w-num'>2 <span className='w-grad'>°C</span></span>
+                  <span className='w-num'>{temperature} <span className='w-grad'>{temp ? "°C": "°F"}</span></span>
                   <h3 className='w-city'>{(selector as WeatherCity[])[0]?.name}, {(selector as WeatherCity[])[0]?.country} </h3>
                   <sub>{now}</sub>
 
               </div>
             <hr/>
             <ul className="weather-extra" >
-                <li>Some extra 1</li>
-                <li> Some extra 2</li>
+                <li><img src="cloud.png" alt='cloud icon '/>Clouds - {(data as WeatherData).current.clouds}%</li>
+                <li><img src="info.png" alt='info icon '/> {(data as WeatherData).current.weather[0].description}</li>
             </ul>
     </Paper>)
 }

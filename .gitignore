@@ -24,3 +24,4 @@ yarn-error.log*
 /public/city.list.json
 /public/city.json
 /public/data.json
+/public/weather.json

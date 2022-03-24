@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import {useAppDispatch} from "../redux/hooks";
 import {setData, WeatherCity, WeatherData, setCity} from "../redux/slices/weather";
 
-export const useData = (path ='data.json',city = 'city.json' ) => {
+export const useData = (path ='weather.json',city = 'city.json' ) => {
     const [loading, isLoading] = useState(true)
     const [error, setError] = useState<string[]>([])
 

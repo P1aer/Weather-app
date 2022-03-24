@@ -22,6 +22,12 @@ nav {
   button {
     text-transform: none;
     font-size: 24px;
+    font-weight: bold;
+    color: rgba(1,1,1,0.4);
+  }
+  .clicked {
+    color: black !important;
+    background-color: transparent !important;
   }
   width: 14%;
   min-width: 200px;
@@ -30,9 +36,14 @@ nav {
   justify-content: space-between;
 }
 .btn {
-  background-color: white;
-  color: black;
- box-shadow: -1px 1px 0 rgba(0,0,0,0.3);
+  background-color: white !important;
+  color: black !important;
+  box-shadow: -1px 1px 0 rgba(0,0,0,0.3);
+
+}
+.clicked {
+     background-color: black !important;
+     color: white !important;
 }
 .measures {
   min-width: 80px;

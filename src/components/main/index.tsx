@@ -1,22 +1,17 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 import "./main.scss";
 import Button from '@mui/material/Button';
-import {Card, IconButton, Typography} from "@mui/material";
-import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
-import {WeatherData, weatherData} from "../../redux/slices/weather";
+import {IconButton} from "@mui/material";
 import {store} from "../../redux/store";
+import Week from "./pages/week";
+import {setTemperature} from "../../redux/slices/app";
+import {useAppDispatch} from "../../redux/hooks";
+import Today from "./pages/today";
 
 const Main:FC = () => {
-    const options:DateTimeFormatOptions = {
-        weekday: "short",
-    };
-    const selector = weatherData(store.getState());
-    const dates = [];
-    for(let i = 1 ; i<=7;i++) {
-        const d = new Date();
-        d.setDate(d.getDate() + i);
-        dates.push(d)
-    }
+    const [temperature, setTemp] = useState(true)
+    const [page, setPage] = useState(true)
+    const dispatch = useAppDispatch()
 /*    React.useEffect(  () => {
        async function data() {
            const fetched =
@@ -29,84 +24,34 @@ const Main:FC = () => {
     },[])*/
 
     //todo посматри потом че будет
-    const d1 = new Date((selector as WeatherData)?.current?.sunrise  * 1000)
-    const d2 = new Date((selector as WeatherData)?.current?.sunset  * 1000)
     return (<div className='main'>
-        <section className='cards'>
-            <nav>
-                <div className='days'>
-                    <Button size={"large"}>Today</Button>
-                    <Button size={"large"}>Week</Button>
-                </div>
-                <div className='measures'>
-                    <IconButton  className='btn'>
-                        °C
-                    </IconButton>
-                    <IconButton className='btn'>
-                        °F
-                    </IconButton>
-                </div>
-            </nav>
-            <div className='grid-cards'>
-                {
-                    dates.map((elem,ind) => {
-                        return(
-                            <Card className='card' key={ind}  elevation={2 }>
-                                <h4>{elem.toLocaleDateString('en',options)}</h4>
-                                <img className='card-img'
-                                     alt='weather img'
-                                     src='https://memepedia.ru/wp-content/uploads/2021/10/chelovechek-pokazyvaet-bolshoj-palec-14.jpg'/>
-                                     <p><b>5°</b> <span>8°</span></p>
-                            </Card>)
-                    })
+        <nav>
+        <div className='days'>
+            <Button onClick={() => setPage(false)}
+                    className={`${!page ? 'clicked':''}`}
+                    size={"large"}>
+                Today
+            </Button>
+            <Button  onClick={() => setPage(true)}
+                     className={`${page ? 'clicked':''}`}
+                     size={"large"}>
+                Week
+            </Button>
+        </div>
+        <div className='measures'>
+            <IconButton onClick={()=> {dispatch(setTemperature(true)); setTemp(true)}}
+                        className={`btn ${temperature?"clicked":""}`}>
+                °C
+            </IconButton>
+            <IconButton  onClick={()=> {dispatch(setTemperature(false)); setTemp(false)}}
+                         className={`btn ${!temperature?"clicked":""}`}>
+                °F
+            </IconButton>
+        </div>
+    </nav> {
+        page ? <Week/> : <Today/>
+    }
 
-                }
-
-            </div>
-        </section>
-        <section className='highlights'>
-            <h1>Highlights</h1>
-            <div className='w-data'>
-                <Card elevation={2 }>
-                    <Typography mb="0.95rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
-                        UV Index
-                    </Typography>
-                </Card>
-                <Card elevation={2 }>
-                    <Typography mb="0.95rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
-                        Wind Status
-                    </Typography>
-                </Card>
-                <Card elevation={2}>
-                    <Typography mb="0.95rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
-                        Sunrise & Sunset
-                    </Typography>
-
-                    <Typography mb="5px" variant='h6' component='h4'>
-                          <img src="sunrise.png" alt="sunrise icon"/> {d1.getHours()} : {d1.getMinutes()}
-                    </Typography>
-                    <Typography variant='h6' component='h4'>
-                        <img src="sunset.png" alt="sunset icon"/>  {d2.getHours()} : {d2.getMinutes()}
-                    </Typography>
-                </Card>
-                <Card elevation={2 }>
-                    <Typography mb="0.95rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
-                        Humidity
-                    </Typography>
-                </Card>
-                <Card elevation={2 }>
-                    <Typography mb="0.95rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
-                        Visibility
-                    </Typography>
-                </Card>
-                <Card elevation={2 }>
-                    <Typography mb="0.95rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
-                        Min & Max Temperature
-                    </Typography>
-                </Card>
-                <img className='map' src='https://c.tenor.com/rQPQLim9lCwAAAAC/veibae-vei-nodders.gif'/>
-            </div>
-        </section>
     </div>)
 }
 export default Main;
