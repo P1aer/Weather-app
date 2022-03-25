@@ -87,7 +87,7 @@ export type WeatherData = {
     "timezone":string,
     "timezone_offset":number,
     current: WeatherCurrentData,
-    daily: WeatherDataDaily
+    daily: WeatherDataDaily[]
 
 }
 interface WeatherState {

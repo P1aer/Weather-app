@@ -6,12 +6,12 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
 import {WeatherCity, weatherCityData, WeatherData, weatherData} from "../../redux/slices/weather";
 import {store} from "../../redux/store";
-import {appDataTemp} from "../../redux/slices/app";
 import {toCelsius, toFahrenheit} from "../../utils/utils";
 import {useAppSelector} from "../../redux/hooks";
 
 const SideBar:FC = () => {
     const options:DateTimeFormatOptions = {
+        hour12: false,
         weekday: "long",
         hour: '2-digit',
         minute: '2-digit',
@@ -30,7 +30,7 @@ const SideBar:FC = () => {
                 type="search"
                 variant="outlined"
                 size={"small"}
-                sx={{backgroundColor:"#f0f0f0"}}
+                sx={{backgroundColor:"#f0f0f0", width:"75%"}}
             />
             <SearchRoundedIcon sx={{fontSize:24}} className='search-icon'/>
             <IconButton sx={{backgroundColor: "#f0f0f0"}}>
