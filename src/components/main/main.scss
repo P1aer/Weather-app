@@ -124,8 +124,8 @@ h2 {
 }
 .hum {
   img {
-    width: 48px;
-    height: 48px;
+    width: 2.5rem;
+    height:2.5rem;
     margin-right: 8px;
   }
   span {
@@ -138,10 +138,10 @@ h2 {
 
 .day-time {
   display: grid;
-  grid-template-columns: repeat(4,auto);
+  grid-template-columns: repeat(4,1fr);
   grid-gap: 50px;
   margin-top: 2.2rem;
-  margin-bottom: 8%;
+  margin-bottom: 6%;
 }
 .t-time {
   border-radius: 12px !important;
@@ -149,20 +149,61 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
+  max-width: 70%;
+  box-sizing: content-box;
+  p {
+    font-size: 1.2rem;
+  }
+  > img {
+    max-width: 100%;
+    margin-top: 10px;
+    border-radius: 6px;
+    object-fit: contain;
+    max-height: 120px;
+    margin-bottom: 10px;
+  }
 }
 .all-data {
   display: grid;
   grid-template-columns: repeat(5,1fr);
   grid-template-rows: 1fr 1fr;
-  width: 100%;
+  max-width: 100%;
   grid-gap: 15px;
   > div {
     border-radius: 12px;
     padding: 15px;
+  h4{
+    font-size: 1.8rem !important;
+    display: flex;
+    align-items: center;
+    >img {
+      width: 2.5rem;
+      margin-right: 0.5rem;
+      margin-bottom: 5px;
+    }
+  }
+    h2 {
+      >img {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+    h3 {
+      display: flex;
+    }
+    h6 {
+      display: flex;
+      align-items: center;
+    }
   }
 }
 .h1-f {
   margin-bottom: 2.2rem;
   font-size: 1.5rem;
+}
+.small {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  margin-bottom: 5px;
 }
