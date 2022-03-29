@@ -12,18 +12,6 @@ const Main:FC = () => {
     const [temperature, setTemp] = useState(true)
     const [page, setPage] = useState(true)
     const dispatch = useAppDispatch()
-/*    React.useEffect(  () => {
-       async function data() {
-           const fetched =
-               await fetch("http://api.openweathermap.org/data/2.5/forecast?id=458774&appid=24da0f10829f7196b261c0c51a882395")
-               https://api.openweathermap.org/data/2.5/onecall?lat=55.7522&lon=37.6156&exclude=minutely,hourly,alerts&appid=24da0f10829f7196b261c0c51a882395
-           const json = await fetched.json();
-           console.log(json)
-        }
-        data()
-    },[])*/
-
-    //todo посматри потом че будет
     return (<div className='main'>
         <nav>
         <div className='days'>

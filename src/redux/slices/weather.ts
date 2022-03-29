@@ -78,7 +78,9 @@ export  type  WeatherCity = {
     "local_names": object
     "lat": number
     "lon": number
-    "country": string
+    "sys": {
+        "country": string
+    }
     "state": string
 }
 export type WeatherData = {
@@ -92,7 +94,7 @@ export type WeatherData = {
 }
 interface WeatherState {
     data: WeatherData | null
-    city: WeatherCity[] | null
+    city: WeatherCity | null
 }
 
 const initialState:WeatherState = {
@@ -109,7 +111,7 @@ export const weatherSlice = createSlice({
         setData: (state, action: PayloadAction<WeatherData>) => {
             state.data = action.payload
         },
-        setCity:(state, action: PayloadAction<WeatherCity[]>) => {
+        setCity:(state, action: PayloadAction<WeatherCity>) => {
             state.city = action.payload
         },
     },

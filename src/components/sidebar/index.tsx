@@ -41,7 +41,7 @@ const SideBar:FC = () => {
               src={`https://openweathermap.org/img/wn/${(data as WeatherData).current.weather[0].icon}@4x.png`}/>
               <div className='weather-info'>
                   <span className='w-num'>{temperature} <span className='w-grad'>{temp ? "°C": "°F"}</span></span>
-                  <h3 className='w-city'>{(selector as WeatherCity[])[0]?.name}, {(selector as WeatherCity[])[0]?.country} </h3>
+                  <h3 className='w-city'>{(selector as WeatherCity)?.name}, {(selector as WeatherCity)?.sys.country} </h3>
                   <sub>{now}</sub>
 
               </div>

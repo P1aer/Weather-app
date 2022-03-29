@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {Card, Typography} from "@mui/material";
 import {useAppSelector} from "../../../redux/hooks";
-import {toCelsius, toFahrenheit} from "../../../utils/utils";
+import {getMessage, toCelsius, toFahrenheit} from "../../../utils/utils";
 import {WeatherData} from "../../../redux/slices/weather";
 
 const Today:FC = () => {
@@ -112,26 +112,29 @@ const Today:FC = () => {
                 <Typography mb="1.5rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
                     Pressure
                 </Typography>
-                <Typography variant="h2">
+                <Typography mb="0.8rem" variant="h2">
                     {pressure} <span style={{fontSize: "1.8rem"}}>hPa</span>
                 </Typography>
+                <span style={{fontSize: "1.8rem",fontWeight: "300"}}>{getMessage('pressure',pressure)}</span>
             </Card>
             <Card elevation={2}>
                 <Typography mb="1.5rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
                     Humidity
                 </Typography>
-                <Typography className='hum' sx={{display:'flex',alignItems:'center'}}  variant='h2'>
+                <Typography mb='0.8rem' className='hum' sx={{display:'flex',alignItems:'center'}}  variant='h2'>
                     <img src='humidity.png' alt='humidity icon'/> {hum} <span>%</span>
                 </Typography>
+                <span style={{fontSize: "1.8rem",fontWeight: "300"}}>{getMessage('humidity',hum)}</span>
             </Card>
             <Card elevation={2}>
                 <Typography mb="1.5rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
                     Dew Point
                 </Typography>
-                <Typography sx={{display:'flex',alignItems:'center'}} variant="h2">
+                <Typography mb="0.8rem" sx={{display:'flex',alignItems:'center'}} variant="h2">
                     <img style={{marginRight: "10px"}} src='dew.png' alt='dew icon'/>
                     {temp ? `${toCelsius(dew)}°C`: `${toFahrenheit(dew)}°F`}
                 </Typography>
+                <span style={{fontSize: "1.8rem",fontWeight: "300"}}>{getMessage('dew',toFahrenheit(dew))}</span>
             </Card>
             <Card elevation={2}>
                 <Typography mb="0.95rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
@@ -165,18 +168,20 @@ const Today:FC = () => {
                 <Typography mb="1.5rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
                     UV Index
                 </Typography>
-                <Typography sx={{display:'flex',alignItems:'center'}} variant="h2">
+                <Typography mb='0.8rem' sx={{display:'flex',alignItems:'center'}} variant="h2">
                     <img style={{marginRight: "8px"}} src='uv.png' alt='uv icon'/> {uv}
                 </Typography>
+                <span style={{fontSize: "1.8rem",fontWeight: "300"}}>{getMessage('uv',uv)}</span>
             </Card>
             <Card elevation={2}>
                 <Typography mb="1.5rem" sx={{opacity: .6}} variant="h5" component={"h3"}>
                     Visibility
                 </Typography>
 
-                <Typography variant="h2">
+                <Typography mb='0.8rem' variant="h2">
                     {visibility /1000} <span style={{fontSize: "1.8rem"}}>Km/h</span>
                 </Typography>
+                <span style={{fontSize: "1.8rem",fontWeight: "300"}}>{getMessage('visibility',visibility /1000)}</span>
             </Card>
         </section>
     </>)
