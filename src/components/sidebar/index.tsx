@@ -4,7 +4,7 @@ import {IconButton, Paper, TextField} from "@mui/material";
 import SearchRoundedIcon  from '@mui/icons-material/SearchRounded';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
-import {setCity, setData, WeatherCity, weatherCityData, WeatherData, weatherData} from "../../redux/slices/weather";
+import {setCity, setData, WeatherCity, weatherCityData, WeatherData} from "../../redux/slices/weather";
 import {store} from "../../redux/store";
 import {toCelsius, toFahrenheit} from "../../utils/utils";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
@@ -30,8 +30,7 @@ const SideBar:FC = () => {
     React.useEffect(() => {
         ( async () => {
             try {
-                console.log(query)
-                if (query != '') {
+                if (query !== '') {
                     const newCity = await fetch(CITY_NAME(query))
                     const res = await newCity.json()
                     const cit = await  fetch(WEATHER_PATH(res[0].lon,res[0].lat))

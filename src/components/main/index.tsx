@@ -2,7 +2,6 @@ import React, {FC, useState} from "react";
 import "./main.scss";
 import Button from '@mui/material/Button';
 import {IconButton} from "@mui/material";
-import {store} from "../../redux/store";
 import Week from "./pages/week";
 import {setTemperature} from "../../redux/slices/app";
 import {useAppDispatch} from "../../redux/hooks";

@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import {useAppDispatch} from "../redux/hooks";
 import {setCity, setData, WeatherCity, WeatherData} from "../redux/slices/weather";
-import {Home} from "@mui/icons-material";
 
-export const CITY_NAME = (city: string) => `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=24da0f10829f7196b261c0c51a882395`
+export const CITY_NAME = (city: string) => `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=24da0f10829f7196b261c0c51a882395`
 export const WEATHER_PATH = (lon:string|number,lat:string|number) => `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=24da0f10829f7196b261c0c51a882395`;
 export const CITY_PATH = (lon:string|number,lat:string|number) => `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=24da0f10829f7196b261c0c51a882395`
 export const STANDARD_CITY = {coords: {longitude:37.6174943,latitude:55.7504461}}
