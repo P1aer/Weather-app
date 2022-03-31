@@ -112,7 +112,6 @@ const Week:FC = () => {
                <img src='mint.png' alt='min temperature icon'/> {temp ? `${toCelsius(min)}°C`: `${toFahrenheit(min)}°F`}
             </Typography>
          </Card>
-         <img className='map' src='https://c.tenor.com/rQPQLim9lCwAAAAC/veibae-vei-nodders.gif'/>
       </div>
    </section>
       </>)
